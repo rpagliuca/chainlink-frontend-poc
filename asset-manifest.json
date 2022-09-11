@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/chainlink-frontend-poc/static/css/main.cf5d6d91.css",
+    "main.js": "/chainlink-frontend-poc/static/js/main.7a9e2d6e.js",
+    "index.html": "/chainlink-frontend-poc/index.html",
+    "main.cf5d6d91.css.map": "/chainlink-frontend-poc/static/css/main.cf5d6d91.css.map",
+    "main.7a9e2d6e.js.map": "/chainlink-frontend-poc/static/js/main.7a9e2d6e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf5d6d91.css",
+    "static/js/main.7a9e2d6e.js"
+  ]
+}
