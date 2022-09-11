@@ -1,5 +1,6 @@
 {
-  "name": "colibri-frontend",
+  "name": "chainlink-frontend-poc",
+  "homepage": "https://rpagliuca.github.io/chainlink-frontend-poc",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
