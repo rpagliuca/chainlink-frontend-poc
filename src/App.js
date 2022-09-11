@@ -3,7 +3,17 @@ import { ethers } from "ethers";
 import { Row, Button, Input } from 'reactstrap';
 
 function App() {
+  if (typeof window.ethereum === 'undefined') {
+    return <MetaMaskNotInstalled/>
+  }
+
+  return <MetaMaskApp/>
+}
+
+function MetaMaskApp() {
+
   const [storedPrice, setStoredPrice] = useState('');
+
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
   const signer = provider.getSigner()
@@ -50,7 +60,7 @@ function App() {
   ]`;
   const contract = new ethers.Contract(contractAddress, ABI, signer);
 
-const getStoredPrice = async () => {
+  const getStoredPrice = async () => {
     try {
       const contractPrice = await contract.storedPrice();
       setStoredPrice(parseInt(contractPrice) / 100000000);
@@ -71,52 +81,63 @@ const getStoredPrice = async () => {
   }
 
   getStoredPrice()
-  .catch(console.error)
+    .catch(console.error)
 
-return (
-  <div className="container">
+  return (
+    <div className="container">
 
-    <Row className="top30">
-      <h1>Colibri</h1>
-    </Row>
+      <Row className="top30">
+        <h1>Colibri</h1>
+      </Row>
 
-    <Row className="top30">
+      <Row className="top30">
 
-      <div className="col">
-        <h3>CPF/Passaporte</h3>
-        <Input placeholder="000.000.000-00"/>
-      </div>
+        <div className="col">
+          <h3>CPF/Passaporte</h3>
+          <Input placeholder="000.000.000-00"/>
+        </div>
 
-      <div className="col">
-        <h3>NDO</h3>
-        <Input placeholder="ABE1234"/>
-      </div>
+        <div className="col">
+          <h3>NDO</h3>
+          <Input placeholder="ABE1234"/>
+        </div>
 
-      <div className="col">
-        <h3>Data</h3>
-        <Input placeholder="AAAA-MM-DD"/>
-      </div>
+        <div className="col">
+          <h3>Data</h3>
+          <Input placeholder="AAAA-MM-DD"/>
+        </div>
 
-    </Row>
+      </Row>
 
-    <Row className="top30">
-      <hr/>
-      <h1>Proof-of-Concept da integração com Chainlink</h1>
-    </Row>
+      <Row className="top30">
+        <hr/>
+        <h1>Proof-of-Concept da integração com Chainlink</h1>
+      </Row>
 
-    <Row className="top30">
-      <div className="col">
-        <h3>ETH/USD: {storedPrice}</h3>
-        <p>Última cotação armazenada no smartcontract</p>
-      </div>
-      <div className="col">
-        <h3>Atualizar cotação via Chainlink</h3>
-        <Button onClick={updateNewPrice}>Atualizar</Button>
-      </div>
-    </Row>
+      <Row className="top30">
+        <div className="col">
+          <h3>ETH/USD: {storedPrice}</h3>
+          <p>Última cotação armazenada no smartcontract</p>
+        </div>
+        <div className="col">
+          <h3>Atualizar cotação via Chainlink</h3>
+          <Button onClick={updateNewPrice}>Atualizar</Button>
+        </div>
+      </Row>
 
-  </div>
-);
+    </div>
+  );
+}
+
+function MetaMaskNotInstalled() {
+  return (
+    <div className="container">
+      <Row className="top30">
+        <h1>Colibri</h1>
+        <h3>MetaMask não instalado. Instale-o e tente novamente.</h3>
+      </Row>
+    </div>
+  )
 }
 
 export default App;
