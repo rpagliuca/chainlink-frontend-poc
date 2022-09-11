@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ethers } from "ethers";
 import { Row, Button, Input } from 'reactstrap';
 
@@ -100,13 +100,18 @@ return (
     </Row>
 
     <Row className="top30">
+      <hr/>
+      <h1>Proof-of-Concept da integração com Chainlink</h1>
+    </Row>
+
+    <Row className="top30">
       <div className="col">
-        <h3>Stored Price</h3>
-        <p>Stored ETH/USD Price: {storedPrice}</p>
+        <h3>ETH/USD: {storedPrice}</h3>
+        <p>Última cotação armazenada no smartcontract</p>
       </div>
       <div className="col">
-        <h3>Atualizar feed de dados</h3>
-        <Button onClick={updateNewPrice}>Update</Button>
+        <h3>Atualizar cotação via Chainlink</h3>
+        <Button onClick={updateNewPrice}>Atualizar</Button>
       </div>
     </Row>
 
